@@ -16,7 +16,7 @@ async function fetchCountries() {
 }
 
 function displayCountries(countries) {
-  countryList.innerHTML = ''; // Clear previous countries before displaying new ones
+  countryList.innerHTML = ''; 
   countries.forEach(country => {
       const card = document.createElement('div');
       card.className = 'card';
@@ -27,13 +27,17 @@ function displayCountries(countries) {
               <i class="far fa-heart"></i>
           </div>
       `;
+      // Add click event to navigate to details page
+      card.onclick = () => {
+        window.location.href = `details.html?name=${encodeURIComponent(country.name.common)}`;
+    };
       countryList.appendChild(card);
   });
 }
 function toggleFavorite(event) {
-  const heartIcon = event.currentTarget.querySelector('i'); // Get the <i> element within the clicked favorite-icon
-  heartIcon.classList.toggle('fas'); // Change to filled heart
-  heartIcon.classList.toggle('far'); // Change to empty heart
+  const heartIcon = event.currentTarget.querySelector('i'); 
+  heartIcon.classList.toggle('fas'); 
+  heartIcon.classList.toggle('far');
 }
 
 
