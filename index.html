@@ -16,28 +16,34 @@
     <div id="app">
         <nav class="navbar">
             <div class="navbar-left">
-              <div class="logo">
-                <span>Your Brand</span>
-              </div>
-              <a href="#favorites" class="favorites">Favorites</a>
+                <div class="logo">
+                    <span>Your Brand</span>
+                </div>
+                <a href="#favorites" class="favorites">Favorites</a>
             </div>
             <div class="navbar-right">
-              <div class="search-icon" id="searchIcon" onclick="toggleSearch()">
-                <i class="fas fa-search"></i>
-              </div>
-              <div class="search-bar" id="searchBar">
-                <input type="text" placeholder="Search...">
-                <span class="close-icon" id="closeIcon" onclick="toggleSearch()">&times;</span>
-              </div>
+                <div class="search-icon" id="searchIcon" onclick="toggleSearch()">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="search-bar" id="searchBar">
+                    <input type="text" placeholder="Search..." id="searchInput" oninput="searchCountries()">
+                    <span class="close-icon" id="closeIcon" onclick="toggleSearch()">&times;</span>
+                    <div id="suggestions" class="suggestions"></div>
+                </div>
             </div>
-          </nav>
-          
-          
-          
-          
-        <main id="country-list"></main>
-        
-        <button id="show-more">Show More</button>
+        </nav>
+          <section class="hero-section">
+            <div class="content">
+              <h1>Your Heading</h1>
+              <p>This is a paragraph with some introductory text.</p>
+            </div>
+          </section>
+          <div class="container">
+            <h1>Countries</h1>
+            <div id="country-list" class="country-list"></div>
+            <button id="load-more" class="load-more">Show More</button>
+        </div>
+    
       </div>
       <script src="script.js"></script>
 </body>
