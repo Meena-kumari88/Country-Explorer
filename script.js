@@ -15,25 +15,27 @@ async function fetchCountries() {
     return allCountries;
 }
 
-// Function to display countries
 function displayCountries(countries) {
-    countries.forEach(country => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-            <img src="${country.flags.png}" alt="${country.name.common} Flag">
-            <h2>${country.name.common}</h2>
-            <i class="far fa-heart"></i>
-        `;
-        countryList.appendChild(card);
-    });
+  countryList.innerHTML = ''; // Clear previous countries before displaying new ones
+  countries.forEach(country => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+          <img src="${country.flags.png}" alt="${country.name.common} Flag">
+          <h2>${country.name.common}</h2>
+          <div class="favorite-icon" onclick="toggleFavorite(event)">
+              <i class="far fa-heart"></i>
+          </div>
+      `;
+      countryList.appendChild(card);
+  });
 }
-// Function to toggle favorite status
 function toggleFavorite(event) {
-  const heartIcon = event.currentTarget.querySelector('i');
-  heartIcon.classList.toggle('fas'); 
-  heartIcon.classList.toggle('far'); 
+  const heartIcon = event.currentTarget.querySelector('i'); // Get the <i> element within the clicked favorite-icon
+  heartIcon.classList.toggle('fas'); // Change to filled heart
+  heartIcon.classList.toggle('far'); // Change to empty heart
 }
+
 
 // Load more countries
 async function loadMoreCountries() {
