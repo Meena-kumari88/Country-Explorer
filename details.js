@@ -8,6 +8,9 @@ async function displayCountryDetails() {
     const urlParams = new URLSearchParams(window.location.search);
     const countryName = urlParams.get('name');
     const country = await fetchCountryDetails(countryName);
+    // Display the flag
+    const countryFlag = document.getElementById('country-flag');
+    countryFlag.src = country.flags.png;
 
     // Display country details
     const countryInfo = document.getElementById('country-info');
