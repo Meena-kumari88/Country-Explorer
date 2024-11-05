@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Country Explorer</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -14,12 +14,22 @@
 <body>
 
     <div id="app">
+        <!-- Navbar -->
         <nav class="navbar">
             <div class="navbar-left">
-                <div class="logo">
-                    <span>Your Brand</span>
+                <div class="sideName">
+                    <span>Country<span class="Explorer">Explorer</span></span>
                 </div>
-               
+                <div class="navbar-center">
+                    <div class="filter">
+                        <select id="languageFilter" onchange="filterCountries()">
+                            <option value="">Language</option>
+                        </select>
+                        <select id="regionFilter" onchange="filterCountries()">
+                            <option value="">Region</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="navbar-right">
                 <div class="search-icon" id="searchIcon" onclick="toggleSearch()">
@@ -32,24 +42,22 @@
                 </div>
             </div>
         </nav>
-          <section class="hero-section">
-            <div class="content">
-              <h1>Your Heading</h1>
-              <p>This is a paragraph with some introductory text.</p>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="container">
+                <div id="country-list" class="country-list"></div>
+                <button id="load-more" class="load-more">Show More</button>
             </div>
-          </section>
-          <div class="container">
-            <h1>Countries</h1>
-            <div id="country-list" class="country-list"></div>
-            <button id="load-more" class="load-more">Show More</button>
+
+            <div id="favorites-section" class="favorites-section" style="display: none;">
+                <h2>Favorites</h2>
+                <div id="favorites-list"></div>
+            </div>
         </div>
-        <div id="favorites-section" class="favorites-section">
-            <h2>Your Favorites</h2>
-            <div id="favorites-list" class="favorites-list"></div>
-        </div>
-    
-      </div>
-      <script src="script.js"></script>
+
+    </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
