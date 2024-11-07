@@ -29,15 +29,21 @@ async function fetchCountries() {
 
 // Load more countries
 async function loadMoreCountries() {
-    await fetchCountries(); 
-    const paginatedCountries = allCountries.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-    displayCountries(paginatedCountries);
+    if(allCountries.length === 0){
+        await fetchCountries(); 
+    }
+    const startIndex =(currentPage-1)*pageSize;
+    const endIndex = currentPage*pageSize;
+    const paginatedCountries = allCountries.slice(startIndex, endIndex);
+    displayCountries(paginatedCountries,true);
     currentPage++;
 }
 
 // Display Functions
-function displayCountries(countries) {
-    countryList.innerHTML = ''; 
+function displayCountries(countries, append=false) {
+    if (!append) {
+        countryList.innerHTML = ''; 
+    }
     countries.forEach(country => {
         const card = document.createElement('div');
         card.className = 'card';
