@@ -118,10 +118,13 @@ background: rgb(135, 110, 160); ;
   outline: none;
   border-radius: 20px;
   background-color: transparent;
-  color: #000;
+  color: #fff;
   font-weight: bold;
   border: 2px solid #fff;
   transition: width 0.4s ease, border 0.4s ease;
+}
+#searchInput::placeholder{
+  color: wheat;
 }
 
 .search-bar.active input {
