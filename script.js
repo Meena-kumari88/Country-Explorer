@@ -158,6 +158,13 @@ function filterCountries() {
     });
 
     displayCountries(filteredCountries);
+
+    // Hide the "Load More" button if any filter is active
+    if(query || selectedLanguage || selectedRegion) {
+        loadMoreButton.style.display = 'none'; 
+    } else {
+        loadMoreButton.style.display = 'block';
+    }
 }
 
 // Search Functionality
