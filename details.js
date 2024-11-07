@@ -25,6 +25,44 @@ async function displayCountryDetails() {
 
     // Set country name in heading
     document.getElementById('country-name').textContent = country.name.common;
+
+    // Set up favorite icon state
+    const favoriteIcon = document.getElementById('favorite-icon');
+    const isFavorited = isFavorite(country.name.common);
+    favoriteIcon.innerHTML = `<i class="${isFavorited ? 'fas' : 'far'} fa-heart"></i>`;
+
+    // Add click event listener to toggle favorite
+    favoriteIcon.onclick = () => toggleFavoriteDetailPage(country.name.common, country.flags.png);
+}
+
+// Favorite Functions
+function isFavorite(countryName) {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    return favorites.some(fav => fav.name === countryName);
+}
+
+function toggleFavoriteDetailPage(countryName, flagUrl) {
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const favoriteIcon = document.getElementById('favorite-icon').querySelector('i');
+    const isFavorited = isFavorite(countryName);
+
+    if (isFavorited) {
+        // Remove from favorites
+        favorites = favorites.filter(fav => fav.name !== countryName);
+    } else {
+        // Add to favorites if less than 5
+        if (favorites.length < 5) {
+            favorites.push({ name: countryName, flag: flagUrl });
+        } else {
+            alert("You can only have up to 5 favorites.");
+            return;
+        }
+    }
+
+    // Toggle icon classes and save favorites
+    favoriteIcon.classList.toggle('fas');
+    favoriteIcon.classList.toggle('far');
+    localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 
 // Call the function to display country details
