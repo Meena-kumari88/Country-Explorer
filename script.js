@@ -1,4 +1,3 @@
-// Constants and Variables
 const countryList = document.getElementById('country-list');
 const loadMoreButton = document.getElementById('load-more');
 const searchInput = document.getElementById('searchInput');
@@ -19,6 +18,7 @@ async function fetchCountries() {
         const response = await fetch('https://restcountries.com/v3.1/all');
         if (!response.ok) throw new Error('Failed to fetch countries');
         allCountries = await response.json();
+        console.log(allCountries);
 
         // Populate the filters after countries are loaded
         populateFilters();
@@ -47,11 +47,13 @@ function displayCountries(countries, append=false) {
     countries.forEach(country => {
         const card = document.createElement('div');
         card.className = 'card';
+       
+        const favoriteClass = isFavorite(country.name.common) ? 'fas' : 'far';
         card.innerHTML = `
             <img src="${country.flags.png}" alt="${country.name.common} Flag">
             <h2>${country.name.common}</h2>
             <div class="favorite-icon" onclick="toggleFavorite(event, '${country.name.common}', '${country.flags.png}')">
-                <i class="${isFavorite(country.name.common) ? 'fas' : 'far'} fa-heart"></i>
+                <i class="${favoriteClass} fa-heart"></i>
             </div>
         `;
         card.onclick = () => {
@@ -115,6 +117,7 @@ function removeFavorite(name) {
     favorites = favorites.filter(fav => fav.name !== name);
     localStorage.setItem('favorites', JSON.stringify(favorites));
     displayFavorites();
+    displayCountries(allCountries.slice(0, currentPage * pageSize));
 }
 
 // Filter Functions
@@ -187,6 +190,9 @@ function searchCountries() {
             const suggestion = document.createElement('div');
             suggestion.textContent = country.name.common;
             suggestion.onclick = () => {
+
+                document.getElementById('languageFilter').value = '';
+                document.getElementById('regionFilter').value = '';
                 countryList.innerHTML = ""; 
                 displayCountries([country]);
                 searchInput.value = ""; 
@@ -214,6 +220,8 @@ function searchCountries() {
     } else {
         suggestionsContainer.style.display = 'none'; 
     }
+    // Hide the "Load More" button when there are search results
+    loadMoreButton.style.display = query ? 'none' : 'block';
 }
 
 // Toggle Search Functionality
@@ -233,6 +241,7 @@ function toggleSearch() {
         searchIcon.style.display = "none"; 
     }
 }
+
 
 // Initial Load
 fetchCountries().then(() => {
