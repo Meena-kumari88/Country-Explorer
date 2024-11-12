@@ -317,15 +317,7 @@ background: rgb(135, 110, 160); ;
 }
 
 
-.favorite-icon {
-  cursor: pointer;
-  font-size: 20px;
-  color: #FF0000;
-}
 
-.favorite-icon:hover {
-  color: #ff4081;
-}
 
 
 .card img {
