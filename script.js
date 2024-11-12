@@ -52,9 +52,6 @@ function displayCountries(countries, append=false) {
         card.innerHTML = `
             <img src="${country.flags.png}" alt="${country.name.common} Flag">
             <h2>${country.name.common}</h2>
-            <div class="favorite-icon" onclick="toggleFavorite(event, '${country.name.common}', '${country.flags.png}')">
-                <i class="${favoriteClass} fa-heart"></i>
-            </div>
         `;
         card.onclick = () => {
             // Navigate to details page with country name as a query parameter
@@ -88,30 +85,7 @@ function isFavorite(countryName) {
     return favorites.some(fav => fav.name === countryName);
 }
 
-function toggleFavorite(event, countryName, flagUrl) {
-    event.stopPropagation(); 
-    const heartIcon = event.currentTarget.querySelector('i'); 
-    heartIcon.classList.toggle('fas'); 
-    heartIcon.classList.toggle('far');
 
-    const isFavorited = isFavorite(countryName);
-
-    if (isFavorited) {
-        favorites = favorites.filter(fav => fav.name !== countryName);
-    } else {
-        if (favorites.length < 5) {
-            favorites.push({ name: countryName, flag: flagUrl });
-        } else {
-            alert("You can only have up to 5 favorites.");
-        }
-    }
-
-    // Log the favorites array to verify contents
-    console.log("Favorites array after toggle:", favorites);
-
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-    displayFavorites();
-}
 
 function removeFavorite(name) {
     favorites = favorites.filter(fav => fav.name !== name);
