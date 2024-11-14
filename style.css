@@ -282,6 +282,7 @@ background: rgb(135, 110, 160); ;
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  overflow-x: hidden;
 }
 
 
@@ -295,7 +296,7 @@ background: rgb(135, 110, 160); ;
 
 .country-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(5, 1fr); 
   gap: 30px;
   margin: 20px 0;
   max-width: 80%;
@@ -316,12 +317,9 @@ background: rgb(135, 110, 160); ;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
 }
 
-
-
-
-
 .card img {
   width: 100%;
+  height: 150px; 
   object-fit: cover; 
   border-radius: 8px;
   margin-bottom: 10px;
@@ -381,6 +379,7 @@ background: rgb(135, 110, 160); ;
   font-size: 1.2rem;
   cursor: pointer;
   margin-left: 10px;
+  margin-right: 2rem;
 }
 
 .load-more {
@@ -393,7 +392,9 @@ background: rgb(135, 110, 160); ;
   cursor: pointer; 
   transition: background-color 0.3s ease, transform 0.3s ease; 
   display: inline-block; 
+  margin: 0 auto;
   margin-bottom: 6rem;
+  
  
 }
 
@@ -403,13 +404,22 @@ background: rgb(135, 110, 160); ;
 }
 
 
-
 /* Responsive Styles */
+@media (max-width: 1280px) {
+  .card img {
+    width: 100%;
+    height: auto;
+  }
+  
+}
 @media (max-width: 1024px) {
   .container {
       width: 70%; 
-      margin-left: 5rem; 
+      margin-left: 2rem; 
   }
+  .country-list {
+    grid-template-columns: repeat(3, 1fr); 
+}
 
   .favorites-section {
       width: 25%; 
@@ -424,6 +434,11 @@ background: rgb(135, 110, 160); ;
   .container {
       width: 100%; 
       margin-left: 0;
+  }
+  .card img {
+    width: 100%;
+    height: auto
+    
   }
 
   .favorites-section {
